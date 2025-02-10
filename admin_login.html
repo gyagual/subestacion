@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .register-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .register-container h1 {
+            color: #004080;
+            margin-bottom: 20px;
+        }
+
+        .register-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container button {
+            background-color: #004080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .register-container button:hover {
+            background-color: #003366;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+
+    <script>
+        function registrarUsuario() {
+            // Obtener los valores de los campos
+            var nombres = document.getElementById('nombres').value;
+            var apellidos = document.getElementById('apellidos').value;
+            var departamento = document.getElementById('departamento').value;
+            var codigoTrabajo = document.getElementById('codigoTrabajo').value;
+            var correo = document.getElementById('correo').value;
+            var password = document.getElementById('password').value;
+            var errorDiv = document.getElementById('error-msg');
+
+            if (nombres && apellidos && departamento && codigoTrabajo && correo && password) {
+                alert("Solicitud enviada al administrador.");
+                window.location.href = "admin_login.html";
+            } else {
+                errorDiv.innerHTML = "Por favor, complete todos los campos.";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="register-container">
+        <h1>Registro de Usuario</h1>
+
+        <input type="text" id="nombres" placeholder="Nombres" required><br>
+        <input type="text" id="apellidos" placeholder="Apellidos" required><br>
+        <input type="text" id="departamento" placeholder="Departamento" required><br>
+        <input type="text" id="codigoTrabajo" placeholder="Código de trabajo" required><br>
+        <input type="email" id="correo" placeholder="Correo Institucional" required><br>
+        <input type="password" id="password" placeholder="Contraseña" required><br>
+
+        <button type="button" onclick="registrarUsuario()">Registrar</button>
+        <div id="error-msg" class="error"></div>
+    </div>
+
+</body>
+</html>
