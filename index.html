@@ -6,89 +6,151 @@
     <title>CNEL Subestaciones</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; }
-        .header { display: flex; align-items: center; background-color: #f1f1f1; padding: 20px; text-align: left; }
-        .header img { max-height: 100px; margin-right: 20px; }
-        .header h1, .header h2 { margin: 5px 0; }
-        .navbar { background-color: #004085; padding: 10px; display: flex; justify-content: space-around; }
-        .navbar a { color: white; text-decoration: none; padding: 14px 20px; font-size: 18px; font-weight: bold; }
-        .navbar a:hover { background-color: #0062cc; }
-        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #004085, #0088cc);
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #002752;
+        }
+
+        .header img {
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 350px;
+            margin: 100px auto;
+        }
+
+        .login-container input, .login-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            background: #ffc107;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #contenido {
+            display: none;
+            padding: 20px;
+            background: white;
+            color: black;
+        }
+
+        .navbar {
+            background-color: #004085;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            background: #0062cc;
+            font-weight: bold;
+        }
+
         #image-container {
-            position: relative;
-            display: inline-block;
+            display: none;
+            text-align: center;
             margin-top: 20px;
         }
 
         #imagen {
             max-width: 100%;
             height: auto;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s;
         }
 
-        .zoom-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.8);
+        .zoom-buttons, #btn-regresar {
+            margin-top: 10px;
+        }
+
+        .zoom-buttons button, #btn-regresar {
             padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        .zoom-buttons button {
-            padding: 8px;
-            margin: 5px;
             font-size: 14px;
             cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #ffc107;
+            font-weight: bold;
         }
 
-        .login-container { text-align: center; margin-top: 50px; }
+        #btn-regresar {
+            background: #dc3545;
+            color: white;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="img/LOGO.png" alt="CNEL Logo">
+        <h1>EMPRESA PUBLICA ESTRATEGICA CORPORACION NACIONAL DE ELECTRICIDAD CNEL EP<br>UNIDAD DE NEGOCIOS GUAYAQUIL<br>SISTEMA ELECTRICO PLAYAS</h1>
+    </div>
+
     <div id="login" class="login-container">
         <h2>Iniciar Sesión</h2>
-        <input type="text" id="username" placeholder="Usuario"><br><br>
-        <input type="password" id="password" placeholder="Contraseña"><br><br>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)">
         <button onclick="verificarLogin()">Ingresar</button>
     </div>
 
-    <div id="contenido" style="display: none;">
-        <div class="header">
-            <img src="img/LOGO.png" alt="Logo CNEL">
-            <div>
-                <h1>EMPRESA PÚBLICA ESTRATÉGICA CORPORACIÓN NACIONAL DE ELECTRICIDAD CNEL EP</h1>
-                <h2>UNIDAD DE NEGOCIOS GUAYAQUIL</h2>
-                <h2>ÁREA DE CONCESIÓN SISTEMA ELÉCTRICO PLAYAS</h2>
-                <h2>DEPARTAMENTO DE SUBESTACIONES</h2>
-            </div>
-        </div>
-
+    <div id="contenido">
         <div class="navbar">
             <a href="#" onclick="mostrarImagen('SNI_PLAYAS.jpg')">SNI - RED PLAYAS</a>
             <a href="#" onclick="mostrarImagen('PLAYAS.jpg')">Subestación Playas</a>
             <a href="#" onclick="mostrarImagen('POSORJA.jpg')">Subestación Posorja</a>
             <a href="#" onclick="mostrarImagen('SANLORENZO.jpg')">Subestación San Lorenzo</a>
             <a href="#" onclick="mostrarImagen('CERECITA.jpg')">Subestación Cerecita</a>
-            <a href="#" onclick="mostrarImagen('TABLERISTAS.jpg')">Personal Operativo</a>
         </div>
 
         <div id="image-container">
-            <img id="imagen" src="" alt="Selecciona una opción para ver la imagen">
-            <div class="zoom-buttons" id="zoom-controls">
+            <img id="imagen" src="" alt="Imagen de subestación">
+            <div class="zoom-buttons">
                 <button onclick="cambiarZoom(0.5)">Zoom 50%</button>
                 <button onclick="cambiarZoom(1)">Zoom 100%</button>
                 <button onclick="cambiarZoom(1.5)">Zoom 150%</button>
-                <button onclick="resetZoom()">Tamaño Normal</button>
-                <button onclick="descargarPDF()">Descargar en PDF</button>
+                <button onclick="descargarPDF()">Descargar PDF</button>
             </div>
+            <button id="btn-regresar" onclick="regresarMenu()">Regresar</button>
         </div>
     </div>
 
     <script>
-        let escala = 1;
-
         function verificarLogin() {
             var user = document.getElementById('username').value;
             var pass = document.getElementById('password').value;
@@ -100,59 +162,57 @@
             }
         }
 
+        function detectarEnter(event) {
+            if (event.key === "Enter") {
+                verificarLogin();
+            }
+        }
+
         function mostrarImagen(nombreImagen) {
             var img = document.getElementById('imagen');
             img.src = 'img/' + nombreImagen;
-            img.alt = "Imagen de " + nombreImagen.split('.')[0];
-
-            // Mostrar controles cuando se seleccione una imagen
-            document.getElementById('zoom-controls').style.display = 'block';
-
-            // Resetear zoom al seleccionar una nueva imagen
-            resetZoom();
-        }
-
-        function cambiarZoom(factor) {
-            escala = factor;
-            document.getElementById('imagen').style.transform = `scale(${escala})`;
-        }
-
-        function resetZoom() {
-            escala = 1;
-            document.getElementById('imagen').style.transform = `scale(${escala})`;
+            document.getElementById('image-container').style.display = 'block';
+            document.getElementById('btn-regresar').style.display = 'block';
         }
 
         function descargarPDF() {
             var { jsPDF } = window.jspdf;
             var doc = new jsPDF('l', 'mm', 'a4');
-
             var img = document.getElementById('imagen');
-
+            
+            // Verificar si la imagen está cargada antes de añadirla al PDF
             if (!img.src || img.src.endsWith("img/")) {
-                alert("Por favor, seleccione una imagen antes de descargar.");
+                alert("Seleccione una imagen antes de descargar.");
                 return;
             }
 
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
+            // Crear un canvas temporal para renderizar la imagen
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
 
-            var tempImage = new Image();
-            tempImage.crossOrigin = "anonymous";
-            tempImage.src = img.src;
+            // Dibujar la imagen en el canvas
+            context.drawImage(img, 0, 0);
 
-            tempImage.onload = function () {
-                canvas.width = tempImage.width;
-                canvas.height = tempImage.height;
-                context.drawImage(tempImage, 0, 0, canvas.width, canvas.height);
-                var imgData = canvas.toDataURL("image/jpeg");
+            // Convertir la imagen en formato base64
+            var imgData = canvas.toDataURL('image/jpeg');
 
-                doc.addImage(imgData, 'JPEG', 10, 10, 270, 150);
-                doc.save("imagen.pdf");
-            };
+            // Añadir la imagen al PDF
+            doc.addImage(imgData, 'JPEG', 10, 10, 270, 150);
+            doc.setFontSize(10);
+            doc.text("CNEL EP - UNIDAD DE NEGOCIOS GUAYAQUIL - SISTEMA ELECTRICO PLAYAS", 160, 200);
+            doc.save("imagen.pdf");
+        }
 
-            tempImage.onerror = function () {
-                alert("Error al cargar la imagen. Verifique el origen del archivo.");
-            };
+        function cambiarZoom(factor) {
+            var img = document.getElementById('imagen');
+            img.style.transform = 'scale(' + factor + ')';
+        }
+
+        function regresarMenu() {
+            document.getElementById('image-container').style.display = 'none';
+            document.getElementById('btn-regresar').style.display = 'none';
         }
     </script>
 </body>
