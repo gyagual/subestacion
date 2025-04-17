@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to botton, #004085, #0088cc);
+            background: linear-gradient(to bottom, #004085, #0088cc);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -161,9 +161,9 @@
         <input type="text" id="username" placeholder="Usuario" required><br>
         <input type="password" id="password" placeholder="Contraseña" required onkeypress="detectarEnter(event)"> <br>
         <label>
-            <input type="checkbox" id="togglePassword" onclick="togglePassword"> <p>Mostrar/Ocultar <br><br>
+            <input type="checkbox" id="togglePassword" onclick="togglePassword()"> <p>Mostrar/Ocultar <br><br>
         </label>
-        <button onclick="verificarLogin()">Ingresar</button><br>
+        <button onclick="verificarLogin()">Ingresar</button><br><br>
         <button onclick="registro()">Registrar</button><br><br>
         <p>¿Olvidaste tu contraseña?</p>
     </div>
@@ -210,10 +210,11 @@ function registro(){
     const correo = document.getElementById('correo').value;
     const clave = document.getElementById('clave').value;
     if(usuario && correo && clave){
-    alert(`USUARIO REGISTRADO CON EXITO\n Nombre:${usuario}\n Correo: ${correo});
-    } else { alert("POR FAVOR, COMPLETE LOS CAMPOS.");
+    alert(`USUARIO REGISTRADO CON EXITO"\n Nombre:${usuario}\n Correo: ${correo}`);
+    } else { 
+        alert("POR FAVOR, COMPLETE LOS CAMPOS.");
     }
-}
+
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
