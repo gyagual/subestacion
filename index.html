@@ -307,6 +307,18 @@ function registro(){
             const input = document.getElementById("password");
             input.type = input.type === "password" ? "text" : "password";
         }
+       
+        function crearAdmin() {
+            const admin = { usuario: "admin2025", clave: "1nf@rt0", correo: "admin@dominio.com" };
+            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        
+            const yaExiste = usuarios.some(u => u.usuario === "admin2025");
+            if (!yaExiste) {
+                usuarios.push(admin);
+                localStorage.setItem("usuarios", JSON.stringify(usuarios));
+                console.log("Administrador creado");
+            }
+        }
     </script>
     
     <footer style="background-color: #002752; color: white; padding: 10px; text-align: center;">
