@@ -231,16 +231,14 @@ function registro() {
     var nombreUsuario = document.getElementById("usuario").value;
     var correo = document.getElementById("correo").value;
     var clave = document.getElementById("clave").value;
-
-    if (nombreUsuario&&correo&&clave) {
+    if (nombreUsuario || correo || clave) {
         alert("Por favor, completa todos los campos.");
         return;
     }else {
         alert("Este nombre de usuario ya tiene una solicitud pendiente o ya está registrado.");
         return;
     }
-
- 
+} 
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
@@ -305,14 +303,14 @@ function registro() {
       }
     
         function incrementarContador() {
-            let contador = localStorage.getItem('visitas');
-            contador = contador ? parseInt(contador) + 1 : 1;
-            localStorage.setItem('visitas', contador);
-            document.getElementById('contador-visitas').textContent = `Visitas totales: ${contador}`;
+            let contador = localStorage.getItem('accesos')||0;
+            contador++;
+            localStorage.setItem('accesos', contador);
+            console.log("Accesos:",contador);
         }
 
         function togglePassword() {
-            const input = document.getElementById("password");
+            var input = document.getElementById("password");
             input.type = input.type === "password" ? "text" : "password";
         }
        
