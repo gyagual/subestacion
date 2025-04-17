@@ -126,6 +126,19 @@
         <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario">
         <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)">
+        function mostrarOcultarContrasena() 
+        {
+            var passwordField = document.getElementById("password");
+            var toggle = document.getElementById("togglePassword");
+        if (toggle.checked) 
+        {
+            passwordField.type = "text";
+        } else 
+            {
+            passwordField.type = "password";
+             }
+        }
+
         <button onclick="verificarLogin()">Ingresar</button>
     </div>
 
