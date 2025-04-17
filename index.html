@@ -63,6 +63,7 @@
             padding: 20px;
             background: white;
             color: black;
+            <p id="contador-visitas" style="text-align:center; margin-top: 10px; font-weight: bold; color: black;"></p>
         }
 
         .navbar {
@@ -138,7 +139,7 @@
             <a href="#" onclick="mostrarImagen('SANLORENZO.jpg')">Subestación San Lorenzo</a>
             <a href="#" onclick="mostrarImagen('CERECITA.jpg')">Subestación Cerecita</a>
             <a href="#" onclick="mostrarImagen('SITE.jpg')">Desbalances</a>
-            <a href="#" onclick="cerrarSesion()">Salir</a>
+            <a href="#" onclick="cerrarSesion()">SALIR</a>
         </div>
 
         <div id="image-container">
@@ -172,6 +173,7 @@
             if (user === "gyagual" && pass === "2015Gary@") {
                 document.getElementById('login').style.display = 'none';
                 document.getElementById('contenido').style.display = 'block';
+                incrementarContador(); // <- Aquí
             } else {
                 alert("Usuario o contraseña incorrectos");
             }
@@ -240,11 +242,18 @@
         // Ocultar imagen si estaba visible
         regresarMenu();
         }
+        function incrementarContador() {
+            let contador = localStorage.getItem('visitas');
+            contador = contador ? parseInt(contador) + 1 : 1;
+            localStorage.setItem('visitas', contador);
+            document.getElementById('contador-visitas').textContent = `Visitas totales: ${contador}`;
+        }
+
 
     </script>
     
     <footer style="background-color: #002752; color: white; padding: 10px; text-align: center;">
-    <p>Construido por Ing. Gary Yagual</p>
+    <p>Construido por Ing. Gary Yagual - AREA DE CONCESIÓN PLAYAS</p>
 </footer>
 
 </body>
