@@ -45,7 +45,7 @@
             width: 90%;
             max-width: 350px;
             text-align: center;
-            margin: 100px auto;
+            margin: 20px auto;
         }
         
         .login-container h2{
@@ -53,8 +53,9 @@
             margin-bottom: 20px;
         }
 
-        .login-container button[type="text"], 
-        .login-container button[type="password"] {
+        .login-container input[type="text"], 
+        .login-container input[type="password"]
+        .login-container input[type="email"] {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
@@ -72,6 +73,7 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 10px;
         }
 .login-container input[type="checkbox"]{
     margin-top: 10px;
@@ -162,9 +164,14 @@
         <input type="password" id="password" placeholder="Contraseña" required onkeypress="detectarEnter(event)"> <br>
         <label>
             <input type="checkbox" id="togglePassword" onclick="togglePassword()"> <p>Mostrar/Ocultar <br><br>
-        </label>
-        <button onclick="verificarLogin()">Ingresar</button><br><br>
-        <button onclick="registro()">Registrar</button><br><br>
+        </label><br>
+        <button onclick="verificarLogin()">Ingresar</button>
+        <hr>
+        <h3>Registro</h3>
+        <input type="text" id="usuario" placeholder="Nombre de usuario">
+        <input type="email" id="correo" placeholder="Correo electrónico">
+        <input type="password" id="clave" placeholder="Contraseña">
+        <button onclick="registro()">Registrar</button>
         <p>¿Olvidaste tu contraseña?</p>
     </div>
 
@@ -210,10 +217,12 @@ function registro(){
     const correo = document.getElementById('correo').value;
     const clave = document.getElementById('clave').value;
     if(usuario && correo && clave){
-    alert(`USUARIO REGISTRADO CON EXITO"\n Nombre:${usuario}\n Correo: ${correo}`);
+        alert(`USUARIO REGISTRADO CON EXITO"\n Nombre:${usuario}\n Correo: ${correo}`);
     } else { 
         alert("POR FAVOR, COMPLETE LOS CAMPOS.");
     }
+}
+       
 
         function detectarEnter(event) {
             if (event.key === "Enter") {
@@ -285,24 +294,16 @@ function registro(){
             document.getElementById('contador-visitas').textContent = `Visitas totales: ${contador}`;
         }
 
-
+        function togglePassword() {
+            const input = document.getElementById("password");
+            input.type = input.type === "password" ? "text" : "password";
+        }
     </script>
     
     <footer style="background-color: #002752; color: white; padding: 10px; text-align: center;">
     <p>Construido por Ing. Gary Yagual - AREA DE CONCESIÓN PLAYAS</p>
         <p id="contador-visitas" style="text-align:center; margin-top: 10px; font-weight: bold; color: white;"></p>
 </footer>
-<script>
-    const togglePassword = document.getElementById("togglePassword");
-    const password = document.getElementById("password");
 
-    togglePassword.addEventListener("change", function () {
-        if (this.checked) {
-            password.type = "text";
-        } else {
-            password.type = "password";
-        }
-    });
-</script>
 </body>
 </html>
