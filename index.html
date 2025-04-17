@@ -159,10 +159,14 @@
 
     <div id="login" class="login-container">
         <h2>Iniciar Sesión</h2>
-        <input type="text" id="username" placeholder="Usuario"><br>
-        <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)"> <br>
-        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br><br>
+        <input type="text" id="username" placeholder="Usuario" required><br>
+        <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)" required> <br>
+        <label>
+            <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br><br>
+        </label>
         <button onclick="verificarLogin()">Ingresar</button>
+        <button onclick="registro()">Registrar</button>
+        <p>¿Olvidaste tu contraseña?</p>
     </div>
 
     <div id="contenido">
@@ -190,15 +194,14 @@
     </div>
 
     <script>
-        function mostrarOcultarContrasena() 
-        {
-        var passwordField = document.getElementById("password");
-        var toggle = document.getElementById("togglePassword");
-        if (toggle.checked) {
-            passwordField.type = "text";
-            } else {
-            passwordField.type = "password";
-            }
+        function mostrarOcultarContrasena() {
+            var passwordField = document.getElementById("password");
+            var toggle = document.getElementById("togglePassword");
+            if (toggle.checked) {
+                passwordField.type = "text";
+                } else {
+                passwordField.type = "password";
+                }
         }
 
 
@@ -213,7 +216,15 @@
                 alert("Usuario o contraseña incorrectos");
             }
         }
-
+function registro(){
+    const usuario = document.getElementById('usuario').value;
+    const correo = document.getElementById('correo').value;
+    const clave = document.getElementById('clave').value;
+    if(usuario && correo && clave){
+    alert(`USUARIO REGISTRADO CON EXITO\n Nombre:${usuario}\n Correo: ${correo});
+    } else { alert("POR FAVOR, COMPLETE LOS CAMPOS.");
+    }
+}
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
