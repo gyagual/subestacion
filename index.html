@@ -10,14 +10,14 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(to botton, #004085, #0088cc);
-            padding: 0;
-            text-align: center;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            padding: 0;
+            text-align: center;
+            color: blue light;
         }
 
         .header {
@@ -156,11 +156,11 @@
         <h1>Empresa Pública Estratégica Corporación Nacional de Electricidad CNEL EP<br>UNIDAD DE NEGOCIOS GUAYAQUIL<br>Sistema Eléctrico Playas</h1>
     </div>
 
-    <div id="login" class="login-container">
+    <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <input type="text" id="Usuario" placeholder="Usuario"><br>
-        <input type="password" id="contraseña" placeholder="Contraseña" onkeypress="detectarEnter(event)"><br>
-        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br>
+        <input type="text" id="Usuario" placeholder="Usuario">
+        <input type="password" id="contraseña" placeholder="Contraseña" onkeypress="detectarEnter(event)"> <br>
+        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br><br>
         <button onclick="verificarLogin()">Ingresar</button>
     </div>
 
