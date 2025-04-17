@@ -19,6 +19,18 @@
             text-align: center;
             color: white;
         }
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+
+    togglePassword.addEventListener("change", function () {
+        if (this.checked) {
+            password.type = "text";
+        } else {
+            password.type = "password";
+        }
+    });
+</script>
 
         .header {
             display: flex;
@@ -160,12 +172,12 @@
     <div id="login" class="login-container">
         <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario" required><br>
-        <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)" required> <br>
+        <input type="password" id="password" placeholder="Contraseña" required onkeypress="detectarEnter(event)"> <br>
         <label>
             <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br><br>
         </label>
-        <button onclick="verificarLogin()">Ingresar</button>
-        <button onclick="registro()">Registrar</button>
+        <button onclick="verificarLogin()">Ingresar</button><br>
+        <button onclick="registro()">Registrar</button><br>
         <p>¿Olvidaste tu contraseña?</p>
     </div>
 
