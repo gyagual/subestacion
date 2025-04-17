@@ -163,8 +163,8 @@
         <label>
             <input type="checkbox" id="togglePassword" onclick="togglePassword"> Mostrar/Ocultar <br><br>
         </label>
-        <button onclick="verificarLogin()">Ingresar</button><br>
-        <button onclick="registro()">Registrar</button><br><br>
+        <a <button onclick="verificarLogin()">Ingresar</button><br> </a>
+        <a <button onclick="registro()">Registrar</button><br><br> </a>
         <p>¿Olvidaste tu contraseña?</p>
     </div>
 
@@ -193,17 +193,7 @@
     </div>
 
     <script>
-        function mostrarOcultarContrasena() {
-            var passwordField = document.getElementById("password");
-            var toggle = document.getElementById("togglePassword");
-            if (toggle.checked) {
-                passwordField.type = "text";
-                } else {
-                passwordField.type = "password";
-                }
-        }
-
-
+        
         function verificarLogin() {
             var user = document.getElementById('username').value;
             var pass = document.getElementById('password').value;
