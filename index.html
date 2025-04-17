@@ -249,42 +249,7 @@ function registro() {
         return;
     }
 
-    solicitudes.push({
-        usuario: nombreUsuario,
-        correo: correo,
-        clave: clave
-    });
-
-    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
-    alert("Solicitud enviada. Espera la aprobación del administrador.");
-    
-    // Limpiar los campos
-    document.getElementById("usuario").value = "";
-    document.getElementById("correo").value = "";
-    document.getElementById("clave").value = "";
-}
-//hasta aqui el registro
-function verificarLogin() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-
-    var usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    var usuario = usuarios.find(u => u.usuario === username && u.clave === password);
-
-    if (usuario) {
-        alert("Inicio de sesión exitoso");
-
-        if (username === "admin") {
-            document.getElementById("admin_login").style.display = "block";
-            <a href="admin_login.html"<\a>
-        }
-
-    } else {
-        alert("Usuario o contraseña incorrectos");
-    }
-}
-
-
+ 
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
