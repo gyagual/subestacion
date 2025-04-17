@@ -228,8 +228,8 @@
         }
         
 function registro() {
-    var nombreUsuario = document.getElementById("usuario").value.trim();
-    var correo = document.getElementById("correo").value.trim();
+    var nombreUsuario = document.getElementById("usuario").value;
+    var correo = document.getElementById("correo").value;
     var clave = document.getElementById("clave").value;
 
     if (!nombreUsuario || !correo || !clave) {
@@ -264,48 +264,8 @@ function registro() {
     document.getElementById("clave").value = "";
 }
 //hasta aqui el registro
-function mostrarSolicitudes() {
-    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
-    var lista = document.getElementById("listaSolicitudes");
-    lista.innerHTML = "";
-
-    solicitudes.forEach((s, index) => {
-        var li = document.createElement("li");
-        li.innerHTML = `
-            <strong>${s.usuario}</strong> (${s.correo})
-            <button onclick="aprobarSolicitud(${index})">Aprobar</button>
-            <button onclick="rechazarSolicitud(${index})">Rechazar</button>
-        `;
-        lista.appendChild(li);
-    });
-}
-//aprobar las solcitudes
-function aprobarSolicitud(index) {
-    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
-    var usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-
-    usuarios.push(solicitudes[index]);
-    solicitudes.splice(index, 1);
-
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
-
-    alert("Usuario aprobado.");
-    mostrarSolicitudes();
-}
-
-function rechazarSolicitud(index) {
-    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
-    solicitudes.splice(index, 1);
-    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
-
-    alert("Solicitud rechazada.");
-    mostrarSolicitudes();
-}
-       
-//hasta aqui aprobar solicitudes
 function verificarLogin() {
-    var username = document.getElementById("username").value.trim();
+    var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
     var usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
@@ -315,8 +275,8 @@ function verificarLogin() {
         alert("Inicio de sesión exitoso");
 
         if (username === "admin") {
-            document.getElementById("admin-panel").style.display = "block";
-            mostrarSolicitudes();
+            document.getElementById("admin_login").style.display = "block";
+            <a href="admin_login.html"<\a>
         }
 
     } else {
@@ -324,7 +284,7 @@ function verificarLogin() {
     }
 }
 
-//hasta aqui mostrar panel
+
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
@@ -401,7 +361,7 @@ function verificarLogin() {
         }
        
         function crearAdmin() {
-            const admin = { usuario: "admin2025", clave: "1nf@rt0", correo: "admin@dominio.com" };
+            const admin = { usuario: "admin2025", clave: "1nf@rt0", correo: "gyagual10@gmail.com" };
             let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
         
             const yaExiste = usuarios.some(u => u.usuario === "admin2025");
