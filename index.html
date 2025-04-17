@@ -207,6 +207,11 @@
             <button id="btn-regresar" onclick="regresarMenu()">Regresar</button>
         </div>
     </div>
+    
+<div id="admin-panel" style="display: none;">
+    <h2>Solicitudes de Registro</h2>
+    <ul id="listaSolicitudes"></ul>
+</div>
 
     <script>
         
@@ -221,18 +226,105 @@
                 alert("Usuario o contraseña incorrectos");
             }
         }
-function registro(){
-    const usuario = document.getElementById('usuario').value;
-    const correo = document.getElementById('correo').value;
-    const clave = document.getElementById('clave').value;
-    if(usuario && correo && clave){
-        alert(`USUARIO REGISTRADO CON EXITO"\n Nombre:${usuario}\n Correo: ${correo}`);
-    } else { 
-        alert("POR FAVOR, COMPLETE LOS CAMPOS.");
+        
+function registro() {
+    var nombreUsuario = document.getElementById("usuario").value.trim();
+    var correo = document.getElementById("correo").value.trim();
+    var clave = document.getElementById("clave").value;
+
+    if (!nombreUsuario || !correo || !clave) {
+        alert("Por favor, completa todos los campos.");
+        return;
     }
+
+    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
+
+    // Verificar si ya existe una solicitud o usuario con ese nombre
+    var usuariosExistentes = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    if (
+        solicitudes.some(u => u.usuario === nombreUsuario) ||
+        usuariosExistentes.some(u => u.usuario === nombreUsuario)
+    ) {
+        alert("Este nombre de usuario ya tiene una solicitud pendiente o ya está registrado.");
+        return;
+    }
+
+    solicitudes.push({
+        usuario: nombreUsuario,
+        correo: correo,
+        clave: clave
+    });
+
+    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
+    alert("Solicitud enviada. Espera la aprobación del administrador.");
+    
+    // Limpiar los campos
+    document.getElementById("usuario").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("clave").value = "";
+}
+//hasta aqui el registro
+function mostrarSolicitudes() {
+    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
+    var lista = document.getElementById("listaSolicitudes");
+    lista.innerHTML = "";
+
+    solicitudes.forEach((s, index) => {
+        var li = document.createElement("li");
+        li.innerHTML = `
+            <strong>${s.usuario}</strong> (${s.correo})
+            <button onclick="aprobarSolicitud(${index})">Aprobar</button>
+            <button onclick="rechazarSolicitud(${index})">Rechazar</button>
+        `;
+        lista.appendChild(li);
+    });
+}
+//aprobar las solcitudes
+function aprobarSolicitud(index) {
+    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
+    var usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+
+    usuarios.push(solicitudes[index]);
+    solicitudes.splice(index, 1);
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
+
+    alert("Usuario aprobado.");
+    mostrarSolicitudes();
+}
+
+function rechazarSolicitud(index) {
+    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
+    solicitudes.splice(index, 1);
+    localStorage.setItem("solicitudesRegistro", JSON.stringify(solicitudes));
+
+    alert("Solicitud rechazada.");
+    mostrarSolicitudes();
 }
        
+//hasta aqui aprobar solicitudes
+function verificarLogin() {
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value;
 
+    var usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    var usuario = usuarios.find(u => u.usuario === username && u.clave === password);
+
+    if (usuario) {
+        alert("Inicio de sesión exitoso");
+
+        if (username === "admin") {
+            document.getElementById("admin-panel").style.display = "block";
+            mostrarSolicitudes();
+        }
+
+    } else {
+        alert("Usuario o contraseña incorrectos");
+    }
+}
+
+//hasta aqui mostrar panel
         function detectarEnter(event) {
             if (event.key === "Enter") {
                 verificarLogin();
