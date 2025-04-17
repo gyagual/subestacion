@@ -98,7 +98,6 @@
             padding: 20px;
             background: #00FFFF;
             color: black;
-            <p id="contador-visitas" style="text-align:center; margin-top: 10px; font-weight: bold; color: black;"></p>
         }
 
         .navbar {
@@ -160,7 +159,7 @@
 
     <div id="login" class="login-container">
         <h2>Iniciar Sesión</h2>
-        <input type="text" id="username" placeholder="Usuario"><br>
+        <input type="text" id="username" placeholder="Usuario"><br><br>
         <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)"> <br>
         <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br><br>
         <button onclick="verificarLogin()">Ingresar</button>
@@ -175,6 +174,7 @@
             <a href="#" onclick="mostrarImagen('CERECITA.jpg')">Subestación Cerecita</a>
             <a href="#" onclick="mostrarImagen('SITE.jpg')">Desbalances</a>
             <a href="#" onclick="cerrarSesion()">SALIR</a>
+            <p id="contador-visitas" style="text-align:center; margin-top: 10px; font-weight: bold; color: black;"></p>
         </div>
 
         <div id="image-container">
