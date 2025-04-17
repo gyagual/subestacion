@@ -45,11 +45,11 @@
 
         .login-container input, .login-container button {
             width: 100%;
-            padding: 17px auto;
+            padding: 12px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
-            font-size: 16px auto;
+            font-size: 16px;
         }
 
         .login-container button {
@@ -126,7 +126,7 @@
         <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario">
         <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)">
-        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar contraseña
+        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar
         <button onclick="verificarLogin()">Ingresar</button>
     </div>
 
@@ -138,6 +138,7 @@
             <a href="#" onclick="mostrarImagen('SANLORENZO.jpg')">Subestación San Lorenzo</a>
             <a href="#" onclick="mostrarImagen('CERECITA.jpg')">Subestación Cerecita</a>
             <a href="#" onclick="mostrarImagen('SITE.jpg')">Desbalances</a>
+            <a href="#" onclick="cerrarSesion()">Salir</a>
         </div>
 
         <div id="image-container">
@@ -163,6 +164,7 @@
             passwordField.type = "password";
             }
         }
+
 
         function verificarLogin() {
             var user = document.getElementById('username').value;
@@ -227,6 +229,18 @@
             document.getElementById('image-container').style.display = 'none';
             document.getElementById('btn-regresar').style.display = 'none';
         }
+        function cerrarSesion() {
+            document.getElementById('contenido').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+    
+            // Limpiar campos de usuario y contraseña
+            document.getElementById('username').value = "";
+            document.getElementById('password').value = "";
+    
+        // Ocultar imagen si estaba visible
+        regresarMenu();
+        }
+
     </script>
     
     <footer style="background-color: #002752; color: white; padding: 10px; text-align: center;">
