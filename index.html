@@ -232,19 +232,10 @@ function registro() {
     var correo = document.getElementById("correo").value;
     var clave = document.getElementById("clave").value;
 
-    if (!nombreUsuario || !correo || !clave) {
+    if (nombreUsuario&&correo&&clave) {
         alert("Por favor, completa todos los campos.");
         return;
-    }
-
-    var solicitudes = JSON.parse(localStorage.getItem("solicitudesRegistro") || "[]");
-
-    // Verificar si ya existe una solicitud o usuario con ese nombre
-    var usuariosExistentes = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    if (
-        solicitudes.some(u => u.usuario === nombreUsuario) ||
-        usuariosExistentes.some(u => u.usuario === nombreUsuario)
-    ) {
+    }else {
         alert("Este nombre de usuario ya tiene una solicitud pendiente o ya está registrado.");
         return;
     }
@@ -311,8 +302,8 @@ function registro() {
             document.getElementById('password').value = "";
     
         // Ocultar imagen si estaba visible
-        regresarMenu();
-        }
+      }
+    
         function incrementarContador() {
             let contador = localStorage.getItem('visitas');
             contador = contador ? parseInt(contador) + 1 : 1;
@@ -325,18 +316,7 @@ function registro() {
             input.type = input.type === "password" ? "text" : "password";
         }
        
-        function crearAdmin() {
-            const admin = { usuario: "admin2025", clave: "1nf@rt0", correo: "gyagual10@gmail.com" };
-            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-        
-            const yaExiste = usuarios.some(u => u.usuario === "admin2025");
-            if (!yaExiste) {
-                usuarios.push(admin);
-                localStorage.setItem("usuarios", JSON.stringify(usuarios));
-                console.log("Administrador creado");
-            }
-        }
-    </script>
+        </script>
     
     <footer style="background-color: #002752; color: white; padding: 10px; text-align: center;">
     <p>Construido por Ing. Gary Yagual - AREA DE CONCESIÓN PLAYAS</p>
