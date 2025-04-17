@@ -19,19 +19,6 @@
             text-align: center;
             color: white;
         }
-<script>
-    const togglePassword = document.getElementById("togglePassword");
-    const password = document.getElementById("password");
-
-    togglePassword.addEventListener("change", function () {
-        if (this.checked) {
-            password.type = "text";
-        } else {
-            password.type = "password";
-        }
-    });
-</script>
-
         .header {
             display: flex;
             align-items: center;
@@ -314,6 +301,17 @@ function registro(){
     <p>Construido por Ing. Gary Yagual - AREA DE CONCESIÓN PLAYAS</p>
         <p id="contador-visitas" style="text-align:center; margin-top: 10px; font-weight: bold; color: white;"></p>
 </footer>
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
 
+    togglePassword.addEventListener("change", function () {
+        if (this.checked) {
+            password.type = "text";
+        } else {
+            password.type = "password";
+        }
+    });
+</script>
 </body>
 </html>
