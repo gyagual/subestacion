@@ -302,12 +302,25 @@ function registro() {
         // Ocultar imagen si estaba visible
       }
     
-        function incrementarContador() {
-            let contador = localStorage.getItem('accesos')||0;
-            contador++;
-            localStorage.setItem('accesos', contador);
-            console.log("Accesos:",contador);
-        }
+    function incrementarContador() {
+    let contador = localStorage.getItem("visitas") || 0;
+    contador++;
+    localStorage.setItem("visitas", contador);
+
+    // Mostrar en el DOM
+    let contadorElemento = document.getElementById("contador");
+    if (!contadorElemento) {
+        contadorElemento = document.createElement("div");
+        contadorElemento.id = "contador";
+        contadorElemento.style.marginTop = "10px";
+        contadorElemento.style.color = "#fff";
+        contadorElemento.style.fontWeight = "bold";
+        contadorElemento.style.fontSize = "14px";
+        document.querySelector(".navbar").appendChild(contadorElemento);
+    }
+    contadorElemento.innerText = `Visitas locales: ${contador}`;
+}
+
 
         function togglePassword() {
             var input = document.getElementById("password");
