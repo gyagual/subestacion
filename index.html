@@ -7,12 +7,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to botton, #004085, #0088cc);
             padding: 0;
             text-align: center;
-            background: linear-gradient(135deg, #004085, #0088cc);
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
 
         .header {
@@ -34,19 +39,26 @@
         }
 
         .login-container {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 350px;
+            text-align: center;
             margin: 100px auto;
         }
+        
+        .login-container h2{
+            color: white;
+            margin-bottom: 20px;
+        }
 
-        .login-container input, .login-container button {
+        .login-container input[type="text"], 
+        .login-container button[type="password"] {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
+            margin: 8px 0;
             border: none;
             border-radius: 5px;
             font-size: 16px;
@@ -54,8 +66,29 @@
 
         .login-container button {
             background: #ffc107;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+        }
+
+    .login-container p{
+        color: white;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+        .foster{
+            background-color: #002147;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
         }
 
         #contenido {
@@ -127,7 +160,7 @@
         <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario">
         <input type="password" id="password" placeholder="Contraseña" onkeypress="detectarEnter(event)">
-        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar
+        <input type="checkbox" id="togglePassword" onclick="mostrarOcultarContrasena()"> Mostrar/Ocultar <br>
         <button onclick="verificarLogin()">Ingresar</button>
     </div>
 
