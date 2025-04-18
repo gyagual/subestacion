@@ -42,6 +42,10 @@
       color: red;
       margin-top: 10px;
     }
+    .success {
+      color: green;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -54,18 +58,20 @@
     <input type="email" id="correo" placeholder="Correo Institucional" required>
     <input type="password" id="password" placeholder="Contraseña" required>
     <button onclick="registrarUsuario()">Registrar</button>
-    <div id="error-msg" class="error"></div>
+    <div id="mensaje" class="error"></div>
   </div>
 
   <script>
     function registrarUsuario() {
-      const nombres = document.getElementById("nombres").value;
-      const apellidos = document.getElementById("apellidos").value;
-      const departamento = document.getElementById("departamento").value;
-      const codigoTrabajo = document.getElementById("codigoTrabajo").value;
-      const correo = document.getElementById("correo").value;
-      const password = document.getElementById("password").value;
-      const errorDiv = document.getElementById("error-msg");
+      const nombres = document.getElementById("nombres").value.trim();
+      const apellidos = document.getElementById("apellidos").value.trim();
+      const departamento = document.getElementById("departamento").value.trim();
+      const codigoTrabajo = document.getElementById("codigoTrabajo").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const mensajeDiv = document.getElementById("mensaje");
+
+      mensajeDiv.className = "error"; // Por defecto
 
       if (nombres && apellidos && departamento && codigoTrabajo && correo && password) {
         fetch("https://script.google.com/macros/s/AKfycbyeTGd5KrYhcQA8CkkDULG5VMSRC8YK8cVM_PE_ysOBbYtbD4lAb9cOslRImE-lc27A/exec", {
@@ -84,15 +90,32 @@
         })
         .then(response => response.text())
         .then(data => {
-          alert("✅ Solicitud enviada al administrador.");
-          window.location.href = "admin_login.html"; // Redirecciona si deseas
+          if (data === "OK") {
+            mensajeDiv.className = "success";
+            mensajeDiv.innerHTML = "✅ Registro exitoso. Redirigiendo...";
+
+            // Limpiar campos
+            document.getElementById("nombres").value = "";
+            document.getElementById("apellidos").value = "";
+            document.getElementById("departamento").value = "";
+            document.getElementById("codigoTrabajo").value = "";
+            document.getElementById("correo").value = "";
+            document.getElementById("password").value = "";
+
+            // Redireccionar después de unos segundos
+            setTimeout(() => {
+              window.location.href = "admin_login.html";
+            }, 1500);
+          } else {
+            mensajeDiv.innerHTML = "❌ Error: " + data;
+          }
         })
         .catch(error => {
           console.error("Error:", error);
-          errorDiv.innerHTML = "❌ Error al enviar el registro.";
+          mensajeDiv.innerHTML = "❌ No se pudo conectar con el servidor.";
         });
       } else {
-        errorDiv.innerHTML = "⚠️ Por favor, complete todos los campos.";
+        mensajeDiv.innerHTML = "⚠️ Por favor, complete todos los campos.";
       }
     }
   </script>
