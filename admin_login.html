@@ -14,7 +14,6 @@
       height: 100vh;
       margin: 0;
     }
-
     .register-container {
       background-color: white;
       padding: 20px;
@@ -23,12 +22,6 @@
       width: 350px;
       text-align: center;
     }
-
-    .register-container h1 {
-      color: #004080;
-      margin-bottom: 20px;
-    }
-
     .register-container input {
       width: 90%;
       padding: 10px;
@@ -36,7 +29,6 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-
     .register-container button {
       background-color: #004080;
       color: white;
@@ -46,87 +38,63 @@
       cursor: pointer;
       width: 100%;
     }
-
-    .register-container button:hover {
-      background-color: #003366;
-    }
-
     .error {
       color: red;
       margin-top: 10px;
     }
-
-    .link-volver {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #004080;
-      text-decoration: none;
-    }
-
-    .link-volver:hover {
-      text-decoration: underline;
-    }
   </style>
-
-  <script>
-    function registrarUsuario() {
-      const nombres = document.getElementById('nombres').value;
-      const apellidos = document.getElementById('apellidos').value;
-      const departamento = document.getElementById('departamento').value;
-      const codigoTrabajo = document.getElementById('codigoTrabajo').value;
-      const correo = document.getElementById('correo').value;
-      const password = document.getElementById('password').value;
-      const errorDiv = document.getElementById('error-msg');
-
-      if (nombres && apellidos && departamento && codigoTrabajo && correo && password) {
-        const datos = {
-          Nombres: nombres,
-          Apellidos: apellidos,
-          Departamento: departamento,
-          CódigoTrabajo: codigoTrabajo,
-          Correo: correo,
-          Contraseña: password
-        };
-
-        fetch("https://script.google.com/macros/s/AKfycbzN_D-7BjcDifdY31JPnaq9JD_-I2p2Epoo0JODOq8ikJ-gD1e_eIm_sVEYAMZr7eBQ/exec", {
-          method: "POST",
-          body: JSON.stringify(datos),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        .then(response => response.text())
-        .then(data => {
-          alert("¡Registro exitoso! Tu solicitud fue enviada al administrador.");
-          window.location.href = "admin_login.html";
-        })
-        .catch(error => {
-          console.error("Error al enviar datos:", error);
-          errorDiv.innerHTML = "Error al registrar. Intente nuevamente.";
-        });
-
-      } else {
-        errorDiv.innerHTML = "Por favor, complete todos los campos.";
-      }
-    }
-  </script>
 </head>
 <body>
   <div class="register-container">
     <h1>Registro de Usuario</h1>
-
-    <input type="text" id="nombres" placeholder="Nombres" required><br>
-    <input type="text" id="apellidos" placeholder="Apellidos" required><br>
-    <input type="text" id="departamento" placeholder="Departamento" required><br>
-    <input type="text" id="codigoTrabajo" placeholder="Código de trabajo" required><br>
-    <input type="email" id="correo" placeholder="Correo Institucional" required><br>
-    <input type="password" id="password" placeholder="Contraseña" required><br>
-
-    <button type="button" onclick="registrarUsuario()">Registrar</button>
+    <input type="text" id="nombres" placeholder="Nombres" required>
+    <input type="text" id="apellidos" placeholder="Apellidos" required>
+    <input type="text" id="departamento" placeholder="Departamento" required>
+    <input type="text" id="codigoTrabajo" placeholder="Código de trabajo" required>
+    <input type="email" id="correo" placeholder="Correo Institucional" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button onclick="registrarUsuario()">Registrar</button>
     <div id="error-msg" class="error"></div>
-
-    <a href="index.html" class="link-volver">← Ir a página principal</a>
   </div>
+
+  <script>
+    function registrarUsuario() {
+      const nombres = document.getElementById("nombres").value;
+      const apellidos = document.getElementById("apellidos").value;
+      const departamento = document.getElementById("departamento").value;
+      const codigoTrabajo = document.getElementById("codigoTrabajo").value;
+      const correo = document.getElementById("correo").value;
+      const password = document.getElementById("password").value;
+      const errorDiv = document.getElementById("error-msg");
+
+      if (nombres && apellidos && departamento && codigoTrabajo && correo && password) {
+        fetch("https://script.google.com/macros/s/AKfycbyeTGd5KrYhcQA8CkkDULG5VMSRC8YK8cVM_PE_ysOBbYtbD4lAb9cOslRImE-lc27A/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            Nombres: nombres,
+            Apellidos: apellidos,
+            Departamento: departamento,
+            CódigoTrabajo: codigoTrabajo,
+            Correo: correo,
+            Contraseña: password
+          })
+        })
+        .then(response => response.text())
+        .then(data => {
+          alert("✅ Solicitud enviada al administrador.");
+          window.location.href = "admin_login.html"; // Redirecciona si deseas
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          errorDiv.innerHTML = "❌ Error al enviar el registro.";
+        });
+      } else {
+        errorDiv.innerHTML = "⚠️ Por favor, complete todos los campos.";
+      }
+    }
+  </script>
 </body>
 </html>
